@@ -12,17 +12,15 @@ else:
     device = "cpu"
 print("device:", device)
 
-cache_dir = "./hf_cache"
-
+#cache_dir = "~/.cache/huggingface/hub"
 print("loading gpt2...")
-model = HookedTransformer.from_pretrained("gpt2-small", device=device, cache_dir=cache_dir)
+model = HookedTransformer.from_pretrained("gpt2-small", device=device)
 
 print("loading sae...")
 sae, cfg_dict, sparsity = SAE.from_pretrained(
     release="gpt2-small-res-jb",
     sae_id="blocks.8.hook_resid_pre",
-    device=device,
-    cache_dir=cache_dir,
+    device=device
 )
 
 print("done")
